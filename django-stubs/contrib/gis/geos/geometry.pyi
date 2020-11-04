@@ -4,8 +4,9 @@ from django.contrib.gis.geometry import (  # noqa: F401
     wkt_regex as wkt_regex,
 )
 from django.contrib.gis.geos.base import GEOSBase as GEOSBase
+from django.contrib.gis.geos.libgeos import GEOM_PTR
 from django.contrib.gis.geos.mutable_list import ListMixin as ListMixin
-from typing import Any, Optional
+from typing import Any, Optional, Union
 
 class GEOSGeometryBase(GEOSBase):
     ptr_type: Any = ...
@@ -137,4 +138,4 @@ class LinearGeometryMixin:
 
 class GEOSGeometry(GEOSGeometryBase, ListMixin):
     srid: Any = ...
-    def __init__(self, geo_input: Any, srid: Optional[Any] = ...) -> None: ...
+    def __init__(self, geo_input: Union[str, bytes, GEOM_PTR, memoryview, "GEOSGeometry"], srid: Optional[int] = ...) -> None: ...
